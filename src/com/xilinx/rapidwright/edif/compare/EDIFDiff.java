@@ -23,6 +23,7 @@
 package com.xilinx.rapidwright.edif.compare;
 
 import com.xilinx.rapidwright.edif.EDIFCell;
+import com.xilinx.rapidwright.edif.EDIFCellInst;
 import com.xilinx.rapidwright.edif.EDIFLibrary;
 
 /**
@@ -44,14 +45,29 @@ public class EDIFDiff {
 
     private String notEqualString;
 
+    private EDIFCellInst sourceInst;
+
+    private String propertyKey;
+
     public EDIFDiff(EDIFDiffType type, Object gold, Object test, EDIFCell parentCell,
-            EDIFLibrary parentLibrary, String notEqualString) {
+            EDIFLibrary parentLibrary, String notEqualString, 
+            EDIFCellInst sourceInst, String propertyKey) {
         this.type = type;
         this.gold = gold;
         this.test = test;
         this.parentCell = parentCell;
         this.parentLibrary = parentLibrary;
         this.notEqualString = notEqualString;
+        this.sourceInst = sourceInst;
+        this.propertyKey = propertyKey;
+    }
+
+    public EDIFCellInst getSourceInst() {
+        return sourceInst;
+    }
+
+    public String getPropertyKey() {
+        return propertyKey;
     }
 
     public String getContext() {
@@ -67,7 +83,6 @@ public class EDIFDiff {
             return test.getClass().getSimpleName();
         return null;
     }
-    
     
     public String toString() {
         StringBuilder sb = new StringBuilder();
